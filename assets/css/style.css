@@ -1,0 +1,11 @@
+
+/*form signup*/
+#content_choice_type, #content_for_login {
+    max-width: 450px;
+    margin: 0 auto ;
+    padding: 30px
+}
+/*#content_student,#content_lecturer{*/
+/*    padding: 30px;*/
+/*}*/
+
