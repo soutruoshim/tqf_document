@@ -6,13 +6,12 @@ class department_model extends CI_Model
         $this->load->database();
     }
 
-//    public function get_departments()
-//    {
-//
-//        $this->db->order_by('department_name');
-//        $query = $this->db->get('tbl_department');
-//        return $query->result_array();
-//    }
+    public function fetch_departments()
+    {
+        $this->db->order_by('department_id');
+        $query = $this->db->get('tbl_department');
+        return $query->result();
+    }
     public function get_departments2($faculty_id)
     {
         if(isset($_POST["search"]["value"]))

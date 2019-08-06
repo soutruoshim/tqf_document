@@ -172,7 +172,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url()."admin/place_study";?>" class="nav-link">
+                        <a href="<?php echo base_url()."admin/course";?>" class="nav-link">
                             <i class="nav-icon fa fa-list-alt"></i>
                             <p>
                                 Course

@@ -31,7 +31,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0" style="margin-top: 15px">
-                        <table id="table_postion" class="table table-bordered table-striped table-hover">
+                        <table id="table_position" class="table table-bordered table-striped table-hover">
                             <thead>
                             <tr>
                                 <th width="10%">ID</th>

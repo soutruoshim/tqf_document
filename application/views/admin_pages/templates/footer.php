@@ -102,6 +102,12 @@
             $('#dep_action').val("Add");
             $('#dep_action1').val("Add");
         });
+        $('#add_position').click(function(){
+            $('#position-form')[0].reset();
+            $('.modal-title').text("Add Postion");
+            $('#action').val("Add");
+            $('#action1').val("Add");
+        });
     });
     //add faculty data
     $(document).on('submit', '#faculty-form', function(event){
@@ -305,6 +311,206 @@
                 )
             }
         })
+    });
+   // positon load tabl
+    $(document).ready(function() {
+        dataTable = $('#table_position').DataTable({
+            'searching': true,
+            'ordering': false,
+            'info': true,
+            'autoWidth': true,
+            'paging': true,
+            'lengthChange': true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo base_url() . 'admin/position/fetch_position'; ?>",
+                type: "POST"
+            },
+            "columnDefs": [
+                {
+                    "targets": [0, 2, 3],
+                    "orderable": false
+
+                },
+            ],
+        });
+    });
+        //add postion data
+        $(document).on('submit', '#position-form', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:"<?php echo base_url() . 'admin/position/insert_update_position'?>",
+                method:'POST',
+                data:new FormData(this),
+                contentType:false,
+                processData:false,
+                success:function(data)
+                {
+
+                    $('#position-form')[0].reset();
+                    $('#modal-position').modal('hide');
+
+                    swal({
+                        title: "Success!",
+                        text: data,
+                        type: "success",
+                        icon: "success"
+                    }).then(function () {
+                        dataTable.ajax.reload();
+                    });
+
+                }
+            });
+        });
+    //edit position
+    $(document).on('click', '.update_position', function(){
+        var position_id = $(this).attr("ID");
+
+        $.ajax({
+            url:"<?php echo base_url(); ?>admin/position/fetch_single_position",
+            method:"POST",
+            data:{position_id:position_id},
+            dataType:"json",
+            success:function(data)
+            {
+                //alert(data);
+                $('#modal-position').modal('show');
+                $('.modal-title').text("Edit Position");
+                $('#position_name').val(data.position_name);
+                $('#position_id').val(position_id);
+                $('#action').val("Edit");
+                $('#action1').val("Edit");
+            }
+        });
+    });
+
+    //delete_position
+    $(document).on('click', '.delete_position', function(){
+        var position_id = $(this).attr("id");
+        swal({
+            title: "Delete",
+            text: "Are you want to delete this data?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url:"<?php echo base_url(); ?>admin/position/delete_position",
+                        method:"POST",
+                        data:{position_id:position_id},
+                        success:function(data)
+                        {
+                            swal(data, {
+                                icon: "success",
+                            });
+
+                            dataTable.ajax.reload();
+                        }
+                    });
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                    return false;
+                }
+            });
+        Swal.fire({
+            title: 'Delete',
+            text: "Are you want to delete this data?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+
+
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+    });
+
+    // table_department_course
+    $(document).ready(function() {
+        dataTable = $('#table_department').DataTable({
+            'searching': false,
+            'ordering': false,
+            'info': true,
+            'autoWidth': true,
+            'paging': true,
+            'lengthChange': true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo base_url() . 'admin/course/fetch_department'; ?>",
+                type: "POST"
+            },
+            "columnDefs": [
+                {
+                    "targets": [0, 1, 2],
+                    "orderable": false
+
+                },
+            ],
+        });
+    });
+
+    //show department
+
+    $( document ).ready(function() {
+        $('#course_content').hide();
+    });
+    var current_department_id=0;
+
+    $(document).on('click', '.show_course', function(){
+        var department_id = $(this).attr("id");
+
+        $('#department').show();
+        current_department_id=department_id;
+        $.ajax({
+            url:"<?php echo base_url(); ?>admin/faculty/fetch_single_department",
+            method:"POST",
+            data:{department_id:department_id},
+            dataType:"json",
+            success:function(data)
+            {
+                //alert(data.faculty_name);
+                $('#title_course').text("Course of "+data.department_name);
+
+            }
+        });
+
+        $('#table_course').DataTable().clear().destroy();
+
+        dataTable = $('#table_course').DataTable({
+            'searching': true,
+            'ordering': false,
+            'info': true,
+            'autoWidth': true,
+            'paging': true,
+            'lengthChange': true,
+            "processing": true,
+            "serverSide": true,
+            "ajax":{
+                url:"<?php echo base_url() . 'admin/course/fetch_course'; ?>",
+                type:"POST",
+                data:{department_id:department_id}
+            },
+            "columnDefs":[
+                {
+                    "targets":[0, 2, 3],
+                    "orderable":false
+
+                },
+            ],
+        });
     });
 
 </script>
