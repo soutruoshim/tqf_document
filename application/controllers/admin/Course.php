@@ -1,7 +1,7 @@
 <?php
 
 class Course extends CI_Controller {
-    // update function
+    // update test function
     public function index(){
 
         $data['title']=ucfirst("Faculty");
