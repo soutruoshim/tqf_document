@@ -3,9 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class course_model extends CI_Model {
 
-    function fetch_data(){
+    function fetch_data($department_id){
         $this->db->limit($_POST['length'], $_POST['start']);
-        $query=$this->db->get("tbl_faculty");
+        $this->db->where("department_id", $department_id);
+        $query=$this->db->get("tbl_course");
         return $query->result();
     }
     //count course in department
@@ -21,33 +22,33 @@ class course_model extends CI_Model {
 
     function fetch_single_data($id)
     {
-        $this->db->where("faculty_id", $id);
-        $query = $this->db->get("tbl_faculty");
+        $this->db->where("course_id", $id);
+        $query = $this->db->get("tbl_course");
         return $query->result();
     }
 
-    function insert_faculty_data($data)
+    function insert_course_data($data)
     {
-        $this->db->insert('tbl_faculty', $data);
+        $this->db->insert('tbl_course', $data);
     }
-    function update_faculty_data($id,$data)
+    function update_course_data($id,$data)
     {
-        $this->db->where("faculty_id", $id);
-        $this->db->update("tbl_faculty", $data);
+        $this->db->where("course_id", $id);
+        $this->db->update("tbl_course", $data);
     }
-    function delete_faculty_data($id){
-        $this->db->where("faculty_id", $id);
-        $this->db->delete("faculty");
+    function delete_course_data($id){
+        $this->db->where("course_id", $id);
+        $this->db->delete("tbl_course");
         //DELETE FROM tbl_faculty WHERE id = $id
     }
     function get_filtered_data(){
-        $query = $this->db->get('tbl_faculty');
+        $query = $this->db->get('tbl_course');
         return $query->num_rows();
     }
     function get_all_data()
     {
         $this->db->select("*");
-        $this->db->from('tbl_faculty');
+        $this->db->from('tbl_course');
         return $this->db->count_all_results();
     }
 }

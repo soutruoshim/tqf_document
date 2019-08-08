@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 06, 2019 at 06:36 AM
+-- Generation Time: Aug 08, 2019 at 09:28 AM
 -- Server version: 5.7.24
 -- PHP Version: 5.6.40
 
@@ -62,7 +62,15 @@ CREATE TABLE IF NOT EXISTS `tbl_building` (
   `building_id` int(11) NOT NULL AUTO_INCREMENT,
   `building_name` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`building_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `tbl_building`
+--
+
+INSERT INTO `tbl_building` (`building_id`, `building_name`) VALUES
+(1, 'A1'),
+(2, 'A2');
 
 -- --------------------------------------------------------
 
@@ -76,7 +84,15 @@ CREATE TABLE IF NOT EXISTS `tbl_course` (
   `course_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `department_id` int(11) NOT NULL,
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `tbl_course`
+--
+
+INSERT INTO `tbl_course` (`course_id`, `course_name`, `department_id`) VALUES
+(2, 'GGGG', 4),
+(3, 'klo', 6);
 
 -- --------------------------------------------------------
 
@@ -101,7 +117,6 @@ INSERT INTO `tbl_department` (`department_id`, `department_name`, `faculty_id`) 
 (6, 'Osuludin', 1),
 (7, 'Sharia', 1),
 (10, 'Sharia', 2),
-(11, 'd', 1),
 (18, 'Dakwah', 2);
 
 -- --------------------------------------------------------
@@ -219,8 +234,16 @@ DROP TABLE IF EXISTS `tbl_room`;
 CREATE TABLE IF NOT EXISTS `tbl_room` (
   `room_id` int(11) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `building_id` int(11) NOT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `tbl_room`
+--
+
+INSERT INTO `tbl_room` (`room_id`, `room_name`, `building_id`) VALUES
+(5, 'A1', 2);
 
 -- --------------------------------------------------------
 

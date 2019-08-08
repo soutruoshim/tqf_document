@@ -120,28 +120,19 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-header">FRAMEWORKS</li>
+                    <li class="nav-header">Users & FRAMEWORKS</li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url()."lecturer/tqf2";?>" class="nav-link">
-                            <i class="nav-icon fa fa-calendar"></i>
+                        <a href="<?php echo base_url()."admin/user";?>" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+
                             <p>
-                                TQF
+                                Users & TQF
                                 <!-- <span class="badge badge-info right">2</span>-->
                             </p>
                         </a>
                     </li>
 
                     <li class="nav-header">General Management</li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url()."admin/user";?>" class="nav-link">
-                            <i class="nav-icon fa fa-users"></i>
-
-                            <p>
-                                Users
-                                <!-- <span class="badge badge-info right">2</span>-->
-                            </p>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a href="<?php echo base_url()."admin/faculty";?>" class="nav-link">
                             <i class="nav-icon fa fa-globe"></i>

@@ -39,27 +39,6 @@ class Course extends CI_Controller {
         );
         echo json_encode($output);
     }
-
-    public function insert_update_department()
-    {
-        if ($this->input->post('dep_action1') == "Add") {
-            $insert_data = array(
-                'department_name' => $this->input->post('department_name'),
-                'faculty_id' => $this->uri->segment(4)
-            );
-            $this->department_model->insert_department_data($insert_data);
-
-            echo 'Department Inserted!';
-        }
-
-        if ($this->input->post('dep_action1') == "Edit") {
-            $updated_data = array(
-                'department_name' => $this->input->post('department_name')
-            );
-            $this->department_model->update_department_data($this->input->post("department_id"), $updated_data);
-            echo 'Department Updated!';
-        }
-    }
     function fetch_single_department()
     {
         $output = array();
@@ -71,10 +50,66 @@ class Course extends CI_Controller {
         }
         echo json_encode($output);
     }
-    function delete_department()
+
+    //fetch department
+    function fetch_course(){
+        $fetch_data = $this->course_model->fetch_data($_POST["department_id"]);
+        $data = array();
+        foreach($fetch_data as $row)
+        {
+            $sub_array = array();
+            $sub_array[] = $row->course_id;
+            $sub_array[] = $row->course_name;
+
+            $sub_array[] = '<button type="button" name="update" id="'.$row->course_id.'" class="btn btn-warning btn-xs update_course">Update</button>';
+            $sub_array[] = '<button type="button" name="delete" id="'.$row->course_id.'" class="btn btn-danger btn-xs delete_course">Delete</button>';
+            $data[] = $sub_array;
+        }
+        $output = array(
+            "draw"                    =>     intval($_POST["draw"]),
+            "recordsTotal"          =>      $this->course_model->get_all_data(),
+            "recordsFiltered"     =>     $this->course_model->get_filtered_data(),
+            "data"                    =>     $data
+        );
+        echo json_encode($output);
+    }
+    public function insert_update_course()
     {
-        $this->department_model->delete_single_department($_POST["department_id"]);
-        echo 'Data Deleted';
+        if ($this->input->post('action1') == "Add") {
+            $insert_data = array(
+                'course_name' => $this->input->post('course_name'),
+                'department_id' => $this->uri->segment(4)
+            );
+            $this->course_model->insert_course_data($insert_data);
+
+            echo 'Course Inserted!';
+        }
+
+        if ($this->input->post('action1') == "Edit") {
+            $updated_data = array(
+                'course_name' => $this->input->post('course_name')
+            );
+            $this->course_model->update_course_data($this->input->post("course_id"), $updated_data);
+            echo 'Course Updated!';
+        }
+    }
+
+    function fetch_single_course()
+    {
+        $output = array();
+        $data = $this->course_model->fetch_single_data($_POST["course_id"]);
+
+        foreach ($data as $row) {
+            $output['course_name'] = $row->course_name;
+
+        }
+        echo json_encode($output);
+    }
+
+    function delete_course()
+    {
+        $this->course_model->delete_course_data($_POST["course_id"]);
+        echo 'This Course Deleted';
     }
 }
 ?>

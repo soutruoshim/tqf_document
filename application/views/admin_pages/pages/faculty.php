@@ -51,7 +51,7 @@
                                     <th width="10%">ID</th>
                                     <th width="55%">Faculty Name</th>
                                     <th width="25%">Department</th>
-                                    <th width="10%">Delete</th>
+                                    <th width="10%">Update</th>
                                 </tr>
                                 </thead>
                             </table>
