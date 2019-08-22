@@ -847,6 +847,31 @@
             }
         })
     });
+    // ===============================user and tqf==========================
+	// lecturer
+    $(document).ready(function () {
+        dataTable = $('#table_lecturer').DataTable({
+            'searching': true,
+            'ordering': false,
+            'info': true,
+            'autoWidth': true,
+            'paging': true,
+            'lengthChange': true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo base_url() . 'admin/lecturer/fetch_lecturer'; ?>",
+                type: "POST"
+            },
+            "columnDefs": [
+                {
+                    "targets": [0, 2, 3],
+                    "orderable": false
+
+                },
+            ],
+        });
+    });
 
 </script>
 </body>

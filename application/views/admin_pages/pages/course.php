@@ -31,8 +31,8 @@
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0" style="margin-top: 15px">
                             <table id="table_department_course" class="table table-bordered table-striped table-hover">
-                                <thead>
-                                <tr>
+                                <thead style="background: blue;color: white">
+                                <tr align="center">
                                     <th width="10%">ID</th>
                                     <th width="55%">Department Name</th>
                                     <th width="35%">Course</th>
@@ -61,7 +61,7 @@
                             <div class="card-body table-responsive p-0" style="margin-top: 15px">
                                 <table id="table_course" class="table table-bordered table-striped table-hover">
                                     <thead>
-                                    <tr>
+                                    <tr style="background: blue;color: white">
                                         <th width="10%">ID</th>
                                         <th width="70%">Course Name</th>
                                         <th width="10%">Update</th>

@@ -51,7 +51,7 @@ class Course extends CI_Controller {
         echo json_encode($output);
     }
 
-    //fetch department
+    //fetch course
     function fetch_course(){
         $fetch_data = $this->course_model->fetch_data($_POST["department_id"]);
         $data = array();
